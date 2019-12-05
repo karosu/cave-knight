@@ -1,7 +1,4 @@
-/* In part 4 I added collision detection and response for the tile map. I also
-fixed the tile map offset from part 3, where every graphical value was offset by
-1 due to the export format of the tile map editor I used. I added the collision_map
-and the collider object to handle collision. I also added a superclass called Object
+/* added the collision_map and the collider object to handle collision. I also added a superclass called Object
 that all other game objects will extend. It has a bunch of methods for working with
 object position. */
 

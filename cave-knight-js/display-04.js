@@ -1,5 +1,4 @@
-/* I changed a few small things since part 3. First, I got rid of my tile value
-offset when drawing tiles from the game object's map. Each value used to be offset
+/* got rid of my tile value offset when drawing tiles from the game object's map. Each value used to be offset
 by 1 due to the export format of my tile map editor. I also changed the rounding
 method in the drawPlayer function from Math.floor to Math.round to better represent
 where the player is actually standing. */

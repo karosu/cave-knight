@@ -5,11 +5,11 @@ window.addEventListener("load", function(event) {
   //// FUNCTIONS ////
   ///////////////////
 
-  var keyDownUp = function(event) {
+  let keyDownUp = function(event) {
     controller.keyDownUp(event.type, event.keyCode);
   };
 
-  var resize = function(event) {
+  let resize = function(event) {
     display.resize(
       document.documentElement.clientWidth - 32,
       document.documentElement.clientHeight - 32,
@@ -18,7 +18,7 @@ window.addEventListener("load", function(event) {
     display.render();
   };
 
-  var render = function() {
+  let render = function() {
     display.drawMap(game.world.map, game.world.columns);
     display.drawPlayer(
       game.world.player,
@@ -28,7 +28,7 @@ window.addEventListener("load", function(event) {
     display.render();
   };
 
-  var update = function() {
+  let update = function() {
     if (controller.left.active) {
       game.world.player.moveLeft();
     }
@@ -47,10 +47,10 @@ window.addEventListener("load", function(event) {
   //// OBJECTS ////
   /////////////////
 
-  var controller = new Controller();
-  var display = new Display(document.querySelector("canvas"));
-  var game = new Game();
-  var engine = new Engine(1000 / 30, render, update);
+  let controller = new Controller();
+  let display = new Display(document.querySelector("canvas"));
+  let game = new Game();
+  let engine = new Engine(1000 / 30, render, update);
 
   ////////////////////
   //// INITIALIZE ////

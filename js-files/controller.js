@@ -6,7 +6,7 @@ const Controller = function() {
   this.up = new Controller.ButtonInput();
 
   this.keyDownUp = function(type, key_code) {
-    var down = type == "keydown" ? true : false;
+    let down = type == "keydown" ? true : false;
 
     switch (key_code) {
       case 37:

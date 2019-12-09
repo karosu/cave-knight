@@ -12,7 +12,7 @@ const Game = function() {
 
 Game.prototype = { constructor: Game };
 
-Game.World = function(friction = 0.9, gravity = 3) {
+Game.World = function(friction = 0.88, gravity = 3) {
   this.collider = new Game.World.Collider(); // Here's the new collider class.
 
   this.friction = friction;
@@ -373,10 +373,10 @@ Game.World.Player.prototype = {
   },
 
   moveLeft: function() {
-    this.velocity_x -= 0.5;
+    this.velocity_x -= 0.48;
   },
   moveRight: function() {
-    this.velocity_x += 0.5;
+    this.velocity_x += 0.48;
   },
 
   update: function() {

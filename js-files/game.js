@@ -94,7 +94,7 @@ Game.World.prototype = {
     object occupies. Right refers to the column in the collision map occupied by
     the right side of the object. Value refers to the value of a collision tile in
     the map under the specified row and column occupied by the object. */
-    var bottom, left, right, top, value;
+    let bottom, left, right, top, value;
 
     /* First we test the top left corner of the object. We get the row and column
     he occupies in the collision map, then we get the value from the collision map
@@ -103,13 +103,7 @@ Game.World.prototype = {
     top = Math.floor(object.getTop() / this.tile_size);
     left = Math.floor(object.getLeft() / this.tile_size);
     value = this.collision_map[top * this.columns + left];
-    this.collider.collide(
-      value,
-      object,
-      left * this.tile_size,
-      top * this.tile_size,
-      this.tile_size
-    );
+    this.collider.collide(value, object, left * this.tile_size, top * this.tile_size, this.tile_size);
 
     /* We must redifine top since the last collision check because the object may
     have moved since the last collision check. Also, the reason I check the top corners
@@ -119,35 +113,17 @@ Game.World.prototype = {
     top = Math.floor(object.getTop() / this.tile_size);
     right = Math.floor(object.getRight() / this.tile_size);
     value = this.collision_map[top * this.columns + right];
-    this.collider.collide(
-      value,
-      object,
-      right * this.tile_size,
-      top * this.tile_size,
-      this.tile_size
-    );
+    this.collider.collide(value, object, right * this.tile_size, top * this.tile_size, this.tile_size);
 
     bottom = Math.floor(object.getBottom() / this.tile_size);
     left = Math.floor(object.getLeft() / this.tile_size);
     value = this.collision_map[bottom * this.columns + left];
-    this.collider.collide(
-      value,
-      object,
-      left * this.tile_size,
-      bottom * this.tile_size,
-      this.tile_size
-    );
+    this.collider.collide(value, object, left * this.tile_size, bottom * this.tile_size, this.tile_size);
 
     bottom = Math.floor(object.getBottom() / this.tile_size);
     right = Math.floor(object.getRight() / this.tile_size);
     value = this.collision_map[bottom * this.columns + right];
-    this.collider.collide(
-      value,
-      object,
-      right * this.tile_size,
-      bottom * this.tile_size,
-      this.tile_size
-    );
+    this.collider.collide(value, object, right * this.tile_size, bottom * this.tile_size, this.tile_size);
   },
 
   update: function() {
@@ -354,10 +330,10 @@ Game.World.Object.prototype = {
 };
 
 Game.World.Player = function(x, y) {
-  Game.World.Object.call(this, 100, 100, 12, 12);
+  Game.World.Object.call(this, 80, 80, 12, 12);
 
-  this.color1 = "#404040";
-  this.color2 = "#f0f0f0";
+  this.color1 = "#000000";
+  this.color2 = "#8b4fc2";
 
   this.jumping = true;
   this.velocity_x = 0;

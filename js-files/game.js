@@ -29,7 +29,7 @@ Game.World = function(friction = 0.88, gravity = 3) {
   this.map = [48,17,17,17,49,48,18,19,16,17,35,36,
               10,39,39,39,16,18,39,31,31,31,39,07,
               10,31,39,31,31,31,39,12,05,05,28,01,
-              35,06,39,39,31,39,39,19,39,39,08,09,
+              35,06,39,39,31,39,04,21,39,39,08,09,
               02,31,31,47,39,47,39,31,31,04,36,25,
               10,39,39,31,39,39,39,31,31,31,39,37,
               10,39,31,04,14,06,39,39,03,39,00,42,
@@ -55,7 +55,7 @@ Game.World = function(friction = 0.88, gravity = 3) {
   this.collision_map = [00,04,04,04,00,00,04,04,04,04,04,00,
                         02,00,00,00,12,06,00,00,00,00,00,08,
                         02,00,00,00,00,00,00,09,05,05,01,00,
-                        00,07,00,00,00,00,00,14,00,00,08,00,
+                        00,07,00,00,00,00,13,14,00,00,08,00,
                         02,00,00,01,00,01,00,00,00,13,04,00,
                         02,00,00,00,00,00,00,00,00,00,00,08,
                         02,00,00,13,01,07,00,00,11,00,09,00,
@@ -144,9 +144,7 @@ Game.World.Collider = function() {
   which collision functions to use based on the value and allows you to tweak the
   other values to fit the specific tile shape. */
   this.collide = function(value, object, tile_x, tile_y, tile_size) {
-    switch (
-      value // which value does our tile have?
-    ) {
+    switch (value) {   // which value does our tile have?
       /* All 15 tile types can be described with only 4 collision methods. These
       methods are mixed and matched for each unique tile. */
 
@@ -237,7 +235,7 @@ Game.World.Collider.prototype = {
 
   collidePlatformLeft: function(object, tile_left) {
     if (object.getRight() > tile_left && object.getOldRight() <= tile_left) {
-      object.setRight(tile_left - 0.01); // -0.01 is to fix a small problem with rounding
+      object.setRight(tile_left - 0.01); // -0.01 is to fix a small problem with rounding ( Collision on the left and top don't naturally move the player out of the tile space, so a collision with that tile can still be detected in the broad phase. Substracting 0.01 moves the player out of the tile space completely, so no collision can be detected)
       object.velocity_x = 0;
       return true;
     }
@@ -255,7 +253,7 @@ Game.World.Collider.prototype = {
 
   collidePlatformTop: function(object, tile_top) {
     if (object.getBottom() > tile_top && object.getOldBottom() <= tile_top) {
-      object.setBottom(tile_top - 0.01);
+      object.setBottom(tile_top - 0.01); // same issue as collidePlatformLeft (See above)
       object.velocity_y = 0;
       object.jumping = false;
       return true;
@@ -330,7 +328,7 @@ Game.World.Object.prototype = {
 };
 
 Game.World.Player = function(x, y) {
-  Game.World.Object.call(this, 80, 80, 12, 12);
+  Game.World.Object.call(this, 100, 100, 12, 12);
 
   this.color1 = "#000000";
   this.color2 = "#8b4fc2";
